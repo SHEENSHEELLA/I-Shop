@@ -1,8 +1,12 @@
-
+import logo from '../../assets/img/logo.svg'
+import cart from "../../assets/img/cart.svg"
 
 const Header = () => {
   return (
-    <div>Header</div>
+    <div className="header">
+      <img src={logo} alt="logo" />
+      <img src={cart} alt="cart" />
+    </div>
   )
 }
 
