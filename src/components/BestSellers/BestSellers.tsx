@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router'
 
 export type ProductType = {
   _id: string
@@ -42,7 +43,8 @@ export const BestSellers = () => {
               <img src={pr.image} alt="img" />
               <h4>{pr.title}</h4>
               <p className="price">${pr.price}</p>
-              <button>Show more</button>
+              {/* <button>Show more</button> */}
+              <Link to={`/product/${pr.id}`}>Show more</Link>
             </div>
           )
         })}
