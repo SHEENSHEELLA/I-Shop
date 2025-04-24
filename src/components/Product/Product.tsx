@@ -15,7 +15,7 @@ export const Product = () => {
     axios
       .get(`https://masterclass.kimitsu.it-incubator.io/api/products/${id}`)
       .then((res) => setProduct(res.data))
-  }, [])
+  }, [id])
 
   if (product === null) {
     return <h2>Продукт еще грузится ...</h2>
