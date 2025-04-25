@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, useEffect } from 'react'
 import avatarIcon from '../../assets/img/avatarIcon.svg'
 import reviewsData from '../../api/reviews.json'
 
@@ -29,7 +29,10 @@ export type ReviewType = {
 // ]
 
 const Reviews = () => {
-  const [reviews, setReviews] = useState<ReviewType[]>(reviewsData)
+  const [reviews, setReviews] = useState<ReviewType[]>(() => {
+    const saved = localStorage.getItem('reviews')
+    return saved ? JSON.parse(saved) : reviewsData
+  })
   const [currentReview, setCurrentReview] = useState('')
 
   const currentReviewHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -37,7 +40,14 @@ const Reviews = () => {
     setCurrentReview(newValue)
   }
 
+  // Сохраняем отзывы в localStorage при их изменении
+  useEffect(() => {
+    localStorage.setItem('reviews', JSON.stringify(reviews))
+  }, [reviews])
+
   const addReviewHandler = () => {
+    if (!currentReview.trim()) return
+
     const newReview = {
       id: Date.now().toString(),
       author: 'Аноним',
