@@ -11,7 +11,7 @@ import Reviews from '../Reviews/Reviews.tsx'
 const Product = () => {
   const [product, setProduct] = useState<ProductType | null>(null)
 
-  const [isProductInCart, setIsProductInСart] = useState<boolean>(false)
+  const [isProductInCart, setIsProductInCart] = useState<boolean>(false)
 
   const { id } = useParams()
 
@@ -23,7 +23,7 @@ const Product = () => {
 
   const addProductToCartHandler = () => {
     alert('Товар успешно добавлен в корзину')
-    setIsProductInСart(true)
+    setIsProductInCart(true)
   }
 
   if (product === null) {
