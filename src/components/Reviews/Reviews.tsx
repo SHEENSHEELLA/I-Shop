@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, ChangeEvent } from 'react'
 import avatarIcon from '../../assets/img/avatarIcon.svg'
 
 export type ReviewType = {
@@ -28,13 +28,35 @@ const reviewsData = [
 
 const Reviews = () => {
   const [reviews, setReviews] = useState<ReviewType[]>(reviewsData)
+  const [currentReview, setCurrentReview] = useState('')
+
+  const currentReviewHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const newValue = e.currentTarget.value
+    setCurrentReview(newValue)
+  }
+
+  const addReviewHandler = () => {
+    const newReview = {
+      author: 'Jane Cooper',
+      title: 'Amazing Product',
+      text: currentReview,
+      date: '05/23/2021',
+      rating: 5,
+    }
+    setReviews([newReview, ...reviews])
+    setCurrentReview('')
+  }
 
   return (
     <div>
       <div className="review">
-        <h3>Reviews (189)</h3>
-        <textarea placeholder="Provide your text..."></textarea>
-        <button>Send review</button>
+        <h3>Reviews ({reviews.length})</h3>
+        <textarea
+          value={currentReview}
+          placeholder="Provide your text..."
+          onChange={currentReviewHandler}
+        ></textarea>
+        <button onClick={addReviewHandler}>Send review</button>
       </div>
       <div>
         {reviews.map((r) => {
