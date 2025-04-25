@@ -1,7 +1,9 @@
 import { useState, ChangeEvent } from 'react'
 import avatarIcon from '../../assets/img/avatarIcon.svg'
+import reviewsData from '../../api/reviews.json'
 
 export type ReviewType = {
+  id: string
   author: string
   title: string
   text: string
@@ -9,22 +11,22 @@ export type ReviewType = {
   rating: number
 }
 
-const reviewsData = [
-  {
-    author: 'Jane Cooper',
-    title: 'Amazing Product',
-    text: 'Lorem Ipsum is simply dummy text',
-    date: '01/01/2021',
-    rating: 4,
-  },
-  {
-    author: 'Max Doodle',
-    title: 'Best choice',
-    text: 'Various versions have evolved over the years',
-    date: '05/23/2021',
-    rating: 5,
-  },
-]
+// const reviewsData = [
+//   {
+//     author: 'Jane Cooper',
+//     title: 'Amazing Product',
+//     text: 'Lorem Ipsum is simply dummy text',
+//     date: '01/01/2021',
+//     rating: 4,
+//   },
+//   {
+//     author: 'Max Doodle',
+//     title: 'Best choice',
+//     text: 'Various versions have evolved over the years',
+//     date: '05/23/2021',
+//     rating: 5,
+//   },
+// ]
 
 const Reviews = () => {
   const [reviews, setReviews] = useState<ReviewType[]>(reviewsData)
@@ -37,10 +39,11 @@ const Reviews = () => {
 
   const addReviewHandler = () => {
     const newReview = {
-      author: 'Jane Cooper',
-      title: 'Amazing Product',
+      id: Date.now().toString(),
+      author: 'Аноним',
+      title: 'Новый отзыв',
       text: currentReview,
-      date: '05/23/2021',
+      date: new Date().toLocaleDateString(),
       rating: 5,
     }
     setReviews([newReview, ...reviews])
@@ -61,7 +64,7 @@ const Reviews = () => {
       <div>
         {reviews.map((r) => {
           return (
-            <div className="reviewField">
+            <div className="reviewField" key={r.id}>
               <div className="info">
                 <div className="user">
                   <img src={avatarIcon} alt="" />
