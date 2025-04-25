@@ -5,8 +5,9 @@ import rating from '../../assets/img/rating.svg'
 import cartWhite from '../../assets/img/cartWhite.svg'
 import arrowBack from '../../assets/img/arrowBack.svg'
 import { useParams, Link } from 'react-router'
+import Reviews from '../Reviews/reviews.tsx'
 
-export const Product = () => {
+const Product = () => {
   const [product, setProduct] = useState<ProductType | null>(null)
 
   const { id } = useParams()
@@ -50,6 +51,9 @@ export const Product = () => {
           </button>
         </div>
       </div>
+          <Reviews />
     </div>
   )
 }
+
+export default Product

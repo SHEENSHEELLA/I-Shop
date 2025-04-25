@@ -1,8 +1,8 @@
 import './App.css'
 import { Route, Routes } from 'react-router'
-import { BestSellers } from './components/BestSellers/BestSellers'
+import BestSellers from './components/BestSellers/BestSellers'
 import Header from './components/Header/Header'
-import { Product } from './components/Product/Product'
+import Product  from './components/Product/Product'
 
 function App() {
   return (

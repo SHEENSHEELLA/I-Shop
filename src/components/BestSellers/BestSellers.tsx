@@ -19,7 +19,7 @@ export type ProductType = {
   __v: number
 }
 
-export const BestSellers = () => {
+const BestSellers = () => {
   const [products, setProducts] = useState<ProductType[]>([])
 
   useEffect(() => {
@@ -52,3 +52,5 @@ export const BestSellers = () => {
     </div>
   )
 }
+
+export default BestSellers
