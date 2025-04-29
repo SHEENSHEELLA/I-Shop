@@ -1,5 +1,5 @@
 .appContainer {
-  width: 1308px;
+  max-width: 1308px;
   padding: 0 66px;
   margin: 0 auto;
 }
@@ -14,6 +14,7 @@
 /* Продукты */
 .bestSeller {
   margin-bottom: 100px;
+  text-align: center;
 }
 
 .bestSeller h2 {
@@ -27,11 +28,12 @@
   column-gap: 32px;
   row-gap: 47px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 /* Карточка */
 .card {
-  width: 303px;
+  max-width: 303px;
   border: 3px solid #f6f7f8;
   display: flex;
   flex-direction: column;
@@ -185,24 +187,34 @@
 }
 
 .product .info button {
-  background: #2068f8;
+  /* Общие стили для всех кнопок */
   border-radius: 4px;
   width: 100%;
   padding: 14px;
-  color: white;
-  border: none;
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
-  justify-content: flex-end;
   display: flex;
   justify-content: center;
+  border: none; /* Начальное состояние без границы */
+  cursor: pointer;
+
+  /* Стили по умолчанию */
+  background: #2068f8;
+  color: white;
 }
 
 .product .info button img {
   width: 18px;
   height: 18px;
   margin-right: 10px;
+}
+
+.product .info button.active {
+  /* Только изменяющиеся свойства */
+  background: #ffffff;
+  color: #2068f8;
+  border: 2px solid #2068f8;
 }
 
 /* Отзывы */
@@ -319,17 +331,3 @@
   left: 0;
   right: 0;
 }
-
-/* .product .info button.active {
-  background: #ffffff;
-  border-radius: 4px;
-  width: 100%;
-  padding: 14px;
-  color: #2068f8;
-  border: 2px solid #2068f8;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 20px;
-  display: flex;
-  justify-content: center;
-} */
