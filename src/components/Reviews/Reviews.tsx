@@ -33,11 +33,21 @@ const Reviews = () => {
     const saved = localStorage.getItem('reviews')
     return saved ? JSON.parse(saved) : reviewsData
   })
-  const [currentReview, setCurrentReview] = useState('')
+  const [reviewInput, setReviewInput] = useState({
+    text: '',
+    author: '',
+    title: '',
+    rating: 5, // default value
+  })
 
-  const currentReviewHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const newValue = e.currentTarget.value
-    setCurrentReview(newValue)
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target
+    setReviewInput((prev) => ({
+      ...prev,
+      [name]: name === 'rating' ? Number(value) : value,
+    }))
   }
 
   // Сохраняем отзывы в localStorage при их изменении
@@ -46,30 +56,70 @@ const Reviews = () => {
   }, [reviews])
 
   const addReviewHandler = () => {
-    if (!currentReview.trim()) return
+    if (!reviewInput.text.trim()) return
 
-    const newReview = {
+    const newReview: ReviewType = {
       id: Date.now().toString(),
-      author: 'Аноним',
-      title: 'Новый отзыв',
-      text: currentReview,
+      author: reviewInput.author || 'Аноним',
+      title: reviewInput.title || 'Без названия',
+      text: reviewInput.text,
       date: new Date().toLocaleDateString(),
-      rating: 5,
+      rating: reviewInput.rating,
     }
+
     setReviews([newReview, ...reviews])
-    setCurrentReview('')
+    setReviewInput({
+      text: '',
+      author: '',
+      title: '',
+      rating: 5,
+    })
   }
 
   return (
     <div>
       <div className="review">
         <h3>Reviews ({reviews.length})</h3>
+        <input
+          type="text"
+          name="author"
+          value={reviewInput.author}
+          onChange={handleInputChange}
+          placeholder="Your name"
+          className="review-input"
+        />
+
+        <input
+          type="text"
+          name="title"
+          value={reviewInput.title}
+          onChange={handleInputChange}
+          placeholder="Review title"
+          className="review-input"
+        />
+
+        <select
+          name="rating"
+          value={reviewInput.rating}
+          onChange={handleInputChange}
+          className="review-select"
+        >
+          {[1, 2, 3, 4, 5].map((num) => (
+            <option key={num} value={num}>
+              {num} Star{num !== 1 ? 's' : ''}
+            </option>
+          ))}
+        </select>
         <textarea
-          value={currentReview}
+          name="text"
+          value={reviewInput.text}
           placeholder="Provide your text..."
-          onChange={currentReviewHandler}
+          onChange={handleInputChange}
+          className="review-textarea"
         ></textarea>
-        <button onClick={addReviewHandler}>Send review</button>
+        <button onClick={addReviewHandler} disabled={!reviewInput.text.trim()}>
+          Send review
+        </button>
       </div>
       <div>
         {reviews.map((r) => {

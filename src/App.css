@@ -237,7 +237,7 @@
 }
 
 .review textarea {
-  width: 100%;
+  /* width: 100%; */
   border: 1px solid #e0dfdc;
   border-radius: 2px;
   height: 66px;
@@ -268,6 +268,11 @@
   margin-bottom: 36px;
   cursor: pointer;
   width: 170px;
+}
+
+.review button:disabled {
+  background: hsl(0, 0%, 95%);
+  cursor: not-allowed;
 }
 
 .reviewField {
@@ -331,3 +336,28 @@
   left: 0;
   right: 0;
 }
+
+/* Новые данные */
+
+.review-input,
+.review-select,
+.review-textarea {
+  display: block;
+  /* width: 100%; */
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.review-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.review-select {
+  cursor: pointer;
+}
+
+
